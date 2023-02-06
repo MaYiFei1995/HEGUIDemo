@@ -28,6 +28,8 @@ import android.provider.CallLog
 import android.provider.ContactsContract
 import android.provider.Settings
 import android.telephony.TelephonyManager
+import android.telephony.cdma.CdmaCellLocation
+import android.telephony.gsm.GsmCellLocation
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
@@ -303,6 +305,27 @@ object Helper {
                 }
             }
             "empty;"
+        } catch (tr: Throwable) {
+            tr.printStackTrace()
+            tr.javaClass.simpleName
+        }
+    }
+
+    fun getCellLocation(context: Context): String {
+        return try {
+            val telephonyManager =
+                context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            return when (val location = telephonyManager.cellLocation) {
+                is GsmCellLocation -> {
+                    "${location.lac},${location.cid}"
+                }
+                is CdmaCellLocation -> {
+                    "${location.baseStationLongitude/14400f},${location.baseStationLatitude/14400f}"
+                }
+                else -> {
+                    "Unknown class ${location.javaClass.simpleName}"
+                }
+            }
         } catch (tr: Throwable) {
             tr.printStackTrace()
             tr.javaClass.simpleName

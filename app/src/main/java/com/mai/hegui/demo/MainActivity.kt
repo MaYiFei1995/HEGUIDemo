@@ -112,6 +112,14 @@ class MainActivity : AppCompatActivity() {
                     return "Location:" + Helper.getLastKnownLocation(activity)
                 }
             }))
+        ret.add(Item("Cell Location",
+            object : Callback(this@MainActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION) {
+                override fun callback(activity: MainActivity): String {
+                    return "CellLocation:" + Helper.getCellLocation(activity)
+                }
+            }))
         ret.add(Item("网络接入标识等", object : Callback(this@MainActivity) {
             override fun callback(activity: MainActivity): String {
                 return "网络接入标识等: " + Helper.getNetworkInfo(activity)
@@ -167,7 +175,7 @@ class MainActivity : AppCompatActivity() {
         ret.add(Item("传感器信息",
             object : Callback(this@MainActivity) {
                 override fun callback(activity: MainActivity): String {
-                    Helper.getSensor(activity);
+                    Helper.getSensor(activity)
                     return "传感器"
                 }
             }))
