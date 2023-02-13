@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
-    implementation 'com.google.android.gms:play-services-ads:20.2.0'
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
     implementation files('./libs/oaid_sdk_1.0.25.aar')
     implementation 'com.guolindev.permissionx:permissionx:1.7.1'
     implementation 'com.github.MaYiFei1995:OAIDHelper:1.2.0'
